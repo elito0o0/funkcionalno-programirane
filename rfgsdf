@@ -1,0 +1,61 @@
+main = do 
+  print (isPandigital 1234 )
+  --print (ds 5)
+ -- print (wh [1..10] [(\x->x>5),even])
+{-remove _ []=[]
+remove x (a:as) = if(x==a)then as else a:(remove x as)
+int [] _ =[]
+int _ []=[]
+int (x:xs) ys=if(x `elem` ys) then x:(int xs (remove x ys)) else (int xs ys)-}
+{-map:: (t->a)->[t]->[a]
+map _ [] =[]
+map f (x:xs) =(f x):(map f xs)
+filter::(t->Bool)->[t]->[t]
+filter _ []=[]
+filter p (x:xs)=if( p x) then x:(filter p xs) else (filter p xs)
+-}
+{-list2primes xs=map special(filter even xs)
+special::Int->(Int,Int)
+special=spH x 2
+spH::Int->Int->Int
+spH x a =if(myprime (x-a)&& myprime a) then ((x-a),a) else sph x (a+1)
+-}
+{-wh::[t]->[(t->Bool)]->[t]
+wh as []=as
+wh as (p:ps)=wh (filter p as) ps-}
+--------------------------------------------------------------
+{-sumDigits::Int->Int
+sumDigits number 
+  |number<10   = number
+  |otherwise   =(mod number 10)+(sumDigits (div number 10))
+ 
+hasZero::Int->Bool
+hasZero number
+   |number==0           = False
+   |(mod number 10)==0  = True
+   |otherwise           = hasZero (div number 10)
+ds::Int->Int
+ds n=dsH n n (1.2*10.0**(fromIntegral n) - 1.0)
+dsH::Int->Int->Double->Int
+dsH n cur mx
+   |(fromIntegral cur)>mx                  =0
+   |sumDigits cur==n && (not(hasZero cur)) =cur + dsH n (cur+1) mx
+   |otherwise                              =dsH n (cur+1) mx-}
+-------------------------------------------------------------------
+isPandigital::Int->Bool
+isPandigital l =
+    oneToNTest (min (numberOfDigits l) 9) l
+numberOfDigits::Int->Int
+numberOfDigits n 
+  |n<10      =1
+  |otherwise =1+(numberOfDigits (div n 10))
+isDin::Int->Int->Bool
+isDin n d
+   |n==0            = False
+   |(mod n 10)== d  =True
+   |otherwise       =isDin (div n 10) d
+oneToNTest::Int->Int->Bool
+oneToNTest n x
+   |n==0            =True
+   |not(isDin x n)  =False
+   |otherwise       =oneToNTest (n-1) x
