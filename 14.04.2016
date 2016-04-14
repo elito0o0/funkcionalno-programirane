@@ -1,0 +1,33 @@
+main=do
+ -- print (c "())(()")
+ -- print( f [("Ivan",6.00),("Penka",4.00)] )
+ print (( (derN (\x->2*x*x) 0.01 2)) 10)--n-ta proizvodna 
+ print ((comp (\x->x*2) (\x->x+1)) 10)
+ print ((comp2 [(\x->x*2),(\x->x+1)]) 10)
+{-c'::String->Int->Bool
+c' _ (-1) =False
+c' [] 0=True
+c' [] _=False
+c' (x:xs) c = c' xs (c+(if (x=='(')then 1 else (-1)))
+c::String->Bool
+c str =c' str 0
+
+f::[(String,Double)]->[String]
+
+maxGrade::[(String,Double)]->Double
+maxGrade db=maximum (map snd db)
+--maxGrade db = maximum [g|(_,g)<-db]
+f str=[name|(name,grade)<-str ,grade==maxGrade str]
+-}
+der::(Double->Double)->Double->(Double->Double)
+der f  eps=(\x ->(f (x+eps)- (f x))/eps)
+
+derN::(Double->Double)->Double->Int->(Double->Double)
+derN ff _ 0 =ff
+derN ff eps n =derN( der ff eps) eps (n-1)
+
+comp::(Double->Double)->(Double->Double)->(Double->Double)
+comp f g=(\x->f (g x))
+comp2::[(Double->Double)]->(Double->Double)
+comp2 [] =(\x->x)
+comp2 (g:gs)=g.(comp2 gs)
