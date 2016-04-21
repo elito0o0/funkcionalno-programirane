@@ -1,0 +1,44 @@
+import Data.List
+--type Point=(Double,Double,Double)
+
+--dist::Point->Point->Double
+--dist a b=
+--mD::[Point]->Double
+--mD ps = minimum [dist a b|a<-ps,b<-(delete a ps)] - import Data.List
+--mH fs x =snd(maximum [((abs(f x),f x)|f<-fs]
+--maximize fs=(\x->mH fs x)
+
+main=do
+
+  print(average [("bread",1),("milk",2.5)])
+  print (dif[("bread",1),("milk",2.5)])
+ --print (f1 "niz" 5 "!!")
+ --print ((f2 5 "!!")"niz")
+ --print (map ('f3' 2) [1,2,3])
+ --print (map (f3 2) [1,2,3])
+-- print (map (2 'f3') [1,2,3])
+ {-
+f1::String->Int->String->String
+f1 str1 k str2 =str1++concat(replicate (k-1) (str2++str1))
+f2::Int->String->(String->String)
+f2 c str2=(\str1->f1 str1 c str2)
+
+f3::Int->Int->Int
+f3 a b=a*(b+2)-}
+
+--zada4a 2
+
+type Product= (String,Double)
+type StoreAvailability =[Product]
+
+--closestToAverage::StoreAvailability->String
+
+
+average::StoreAvailability->Double
+average xs =((sum[snd (name,price)|(name,price)<-xs])/(fromIntegral (length xs)))
+dif::StoreAvailability->String
+dif xs =snd( minimum [((abs((average xs) -(snd (name,price)))),name) |(name,price)<-xs])
+
+chAl::StoreAvailability->Int
+chAl ps =length(nub [name|name<-uniques, (elem name (delete name uniques))])-- nub["a","b","b","b"]->["a","b"]
+   where uniques =map fst (nub ps)
